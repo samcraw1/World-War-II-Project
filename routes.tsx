@@ -1,12 +1,14 @@
 import express from 'express';
 import { db } from './db';
+import { currentWarDate } from './warDate';
 
 const router = express.Router();
 
 router.get('/timeline', async (request, response) => {
     try {
         const { rows: getCurrentTimeline } = await db.query(
-            'SELECT id, title, date FROM timeline ORDER BY date'
+            'SELECT id, title, date FROM timeline WHERE date <= $1 ORDER BY date DESC',
+            [currentWarDate()]
         );
 
         if(!getCurrentTimeline || getCurrentTimeline.length === 0) {
