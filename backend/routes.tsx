@@ -2,7 +2,9 @@ import express from 'express';
 import { db } from './db';
 import { currentWarDate } from './warDate';
 
+
 const router = express.Router();
+
 
 router.get('/timeline/today', async (request, response) => {
     try {
