@@ -1,0 +1,35 @@
+:root {
+    --bg: #14160f;
+    --text: #e8e6d9;
+    --muted: #9a9880;
+    --line: #5c6142;
+    --accent: #b8a24a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.7;
+}
+
+.status { text-align: center; color: var(--muted); padding: 4rem 16px; }
+
+.today { max-width: 720px; margin: 0 auto; padding: 0 16px 5rem; }
+
+.cover {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 3rem;
+}
+.cover-title { margin: 0; text-transform: uppercase; letter-spacing: 0.25em; font-size: 0.85rem; color: var(--muted); }
+.cover-date { margin: 1rem 0 0.25rem; font-size: clamp(2rem, 8vw, 3.25rem); font-weight: 400; }
+.cover-day { margin: 0; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.9rem; }
+
+.headline { font-size: clamp(1.75rem, 6vw, 2.5rem); line-height: 1.2; margin: 0 0 1.5rem; }
+.story p { margin: 0 0 1.25rem; font-size: 1.1rem; max-width: 65ch; }
+.story p:first-of-type::first-letter { color: var(--accent); }

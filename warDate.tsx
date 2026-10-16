@@ -9,3 +9,4 @@ export function currentWarDate(): string {
     const warDate = Math.min(WAR_START + Math.max(elapsed, 0), WAR_END);
     return new Date(warDate).toISOString().slice(0, 10);
 }
+                       

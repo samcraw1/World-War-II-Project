@@ -4,18 +4,18 @@ import { currentWarDate } from './warDate';
 
 const router = express.Router();
 
-router.get('/timeline', async (request, response) => {
+router.get('/timeline/today', async (request, response) => {
     try {
-        const { rows: getCurrentTimeline } = await db.query(
-            'SELECT id, title, date FROM timeline WHERE date <= $1 ORDER BY date DESC',
+        const { rows: [getToday] } = await db.query(
+            'SELECT id, title, story, date FROM timeline WHERE date = $1 LIMIT 1',
             [currentWarDate()]
         );
 
-        if(!getCurrentTimeline || getCurrentTimeline.length === 0) {
-            return response.status(404).json({ message: 'No timeline found' });
+        if(!getToday) {
+            return response.status(404).json({ message: 'Nothing recorded for today' });
         }
 
-        response.json(getCurrentTimeline);
+        response.json(getToday);
     } catch (error) {
         console.error(error);
         response.status(500).json({ message: 'Internal server error' });

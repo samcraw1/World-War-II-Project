@@ -28,5 +28,6 @@ export type Like = {
 export type Timeline = {
     id: string
     title: string
+    story: string
     date: string
 }
