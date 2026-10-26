@@ -1,0 +1,134 @@
+[
+  {
+    "kind": "record",
+    "id": "f41a",
+    "date": "1941-12-07",
+    "time": "07:48",
+    "theater": "pacific",
+    "dateline": "PEARL HARBOR, OAHU",
+    "headline": "Japanese aircraft attack the US Pacific Fleet",
+    "body": "Carrier-based Japanese planes strike the fleet at anchor and nearby airfields in two waves. Eight battleships are damaged or sunk; USS Arizona explodes and sinks.",
+    "context": "2,403 Americans were killed and 1,178 wounded. The US carriers were at sea and escaped.",
+    "sources": [
+      "nhhc",
+      "nww2",
+      "nara"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f41b",
+    "date": "1941-12-07",
+    "time": "14:26",
+    "theater": "americas",
+    "dateline": "NEW YORK · RADIO",
+    "headline": "First bulletins interrupt Sunday broadcasts",
+    "body": "Radio networks break into programmes on the US mainland with news of the attack. Crowds gather outside newspaper offices.",
+    "sources": [
+      "nara"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r41a",
+    "date": "1941-12-07",
+    "time": "08:20",
+    "theater": "pacific",
+    "person": "mae",
+    "body": "Every line on the board lit up at once. Smoke coming up over the harbor. A man shouting that it isn't practice. I'm patching calls and I can't stop to look out the window.",
+    "groundedIn": [
+      "f41a"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r41b",
+    "date": "1941-12-07",
+    "time": "14:50",
+    "theater": "americas",
+    "person": "ray",
+    "body": "Football on the radio and then a man cut in. Pearl Harbor. Had to find it on the atlas. Ma's sitting at the kitchen table and hasn't moved.",
+    "groundedIn": [
+      "f41b",
+      "f41a"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f41c",
+    "date": "1941-12-08",
+    "theater": "pacific",
+    "dateline": "MALAYA · HONG KONG · PHILIPPINES",
+    "headline": "Japan attacks across Asia and the Pacific",
+    "body": "Japanese troops land at Kota Bharu in Malaya and attack Hong Kong. Aircraft destroy much of the US air force in the Philippines on the ground at Clark Field. Guam and Wake Island are struck.",
+    "context": "Because of the date line, these attacks fell on 8 December local time but within hours of Pearl Harbor.",
+    "sources": [
+      "iwm",
+      "nww2"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f41d",
+    "date": "1941-12-08",
+    "time": "12:30",
+    "theater": "americas",
+    "dateline": "WASHINGTON",
+    "headline": "Roosevelt asks Congress to declare war on Japan",
+    "body": "In a short address to a joint session, the President describes the previous day as one that will live in infamy. Congress votes for war within the hour, with one dissenting vote.",
+    "sources": [
+      "nara"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f41e",
+    "date": "1941-12-08",
+    "theater": "britain",
+    "dateline": "LONDON",
+    "headline": "Britain declares war on Japan",
+    "body": "The British government declares war on Japan following attacks on Malaya and Hong Kong.",
+    "sources": [
+      "tna"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r41c",
+    "date": "1941-12-09",
+    "time": "07:00",
+    "theater": "americas",
+    "person": "ray",
+    "body": "Line at the recruiting office went round the block by seven. Saw half my shift there. Foreman said the plant's switching over and they'll need us more on the lathes than in uniform. Haven't decided.",
+    "groundedIn": [
+      "f41d"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f41f",
+    "date": "1941-12-10",
+    "theater": "pacific",
+    "dateline": "OFF KUANTAN, MALAYA",
+    "headline": "HMS Prince of Wales and HMS Repulse sunk",
+    "body": "Japanese land-based bombers and torpedo planes sink the British battleship and battlecruiser at sea. More than 800 men are lost.",
+    "context": "It was the first time capital ships under way at sea were sunk by aircraft alone.",
+    "sources": [
+      "iwm",
+      "cwgc"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f41g",
+    "date": "1941-12-11",
+    "theater": "global",
+    "dateline": "BERLIN · ROME · WASHINGTON",
+    "headline": "Germany and Italy declare war on the United States",
+    "body": "Hitler announces the declaration in the Reichstag; Italy follows. Congress responds the same day with declarations of war on both.",
+    "sources": [
+      "nara",
+      "iwm"
+    ]
+  }
+]

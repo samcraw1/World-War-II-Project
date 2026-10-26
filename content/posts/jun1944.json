@@ -1,0 +1,192 @@
+[
+  {
+    "kind": "record",
+    "id": "f44a",
+    "date": "1944-06-05",
+    "theater": "west",
+    "dateline": "SOUTHWICK HOUSE, PORTSMOUTH",
+    "headline": "Eisenhower confirms invasion for 6 June",
+    "body": "After a one-day postponement for storms, forecasters predict a brief window of better weather. In the early hours the Supreme Commander gives the order to go.",
+    "sources": [
+      "iwm",
+      "nww2"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f44b",
+    "date": "1944-06-05",
+    "theater": "west",
+    "dateline": "ROME",
+    "headline": "Allied troops in Rome",
+    "body": "The US Fifth Army entered the city late on 4 June. Rome is the first Axis capital to fall to the Allies.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r44a",
+    "date": "1944-06-05",
+    "time": "21:30",
+    "theater": "west",
+    "person": "harold",
+    "body": "Faces blacked, chutes on. They read us a message from Ike on the airfield. Somebody's playing cards on a parachute bag like it's any Monday. Wheels up soon.",
+    "groundedIn": [
+      "f44a"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f44c",
+    "date": "1944-06-06",
+    "time": "00:15",
+    "theater": "west",
+    "dateline": "NORMANDY",
+    "headline": "Airborne troops land behind the beaches",
+    "body": "British and US paratroopers and glider troops land in darkness to seize bridges and road junctions on both flanks of the invasion area. Many are scattered far from their drop zones.",
+    "sources": [
+      "iwm",
+      "nww2"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f44d",
+    "date": "1944-06-06",
+    "time": "06:30",
+    "theater": "west",
+    "dateline": "NORMANDY COAST",
+    "headline": "Allied landings on five beaches",
+    "body": "US troops land on Utah and Omaha, British on Gold and Sword, Canadians on Juno. Omaha sees the heaviest losses. By nightfall about 156,000 Allied troops are ashore.",
+    "context": "Allied casualties on D-Day are estimated at more than 10,000, including about 4,400 dead.",
+    "sources": [
+      "iwm",
+      "nww2",
+      "cwgc"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f44e",
+    "date": "1944-06-06",
+    "time": "09:32",
+    "theater": "britain",
+    "dateline": "LONDON · BBC",
+    "headline": "BBC confirms Allied landings in northern France",
+    "body": "A short bulletin tells listeners that Allied naval forces, supported by strong air forces, began landing armies on the northern coast of France that morning.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r44b",
+    "date": "1944-06-06",
+    "time": "03:10",
+    "theater": "west",
+    "person": "harold",
+    "body": "Down in a flooded field. No idea where. Found two guys from another company using the cricket clickers. We're heading toward the church tower we can see. Moving now.",
+    "groundedIn": [
+      "f44c"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r44c",
+    "date": "1944-06-06",
+    "time": "06:00",
+    "theater": "west",
+    "person": "marthe",
+    "body": "Nobody slept. Aircraft all night, then men with painted faces in our orchard asking the way in terrible French. The cows will not stand still. The sea is grey with ships.",
+    "groundedIn": [
+      "f44c",
+      "f44d"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r44d",
+    "date": "1944-06-06",
+    "time": "09:45",
+    "theater": "britain",
+    "person": "joan",
+    "body": "Wireless on at work, whole floor stopped to listen. It's begun. Our Billy is seventeen now and thank God still in school. Thinking of every mother whose boy is on that beach.",
+    "groundedIn": [
+      "f44e"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f44f",
+    "date": "1944-06-07",
+    "theater": "west",
+    "dateline": "BAYEUX",
+    "headline": "Bayeux liberated",
+    "body": "British troops enter Bayeux, the first French town of significance to be freed in the campaign. The town is taken almost undamaged.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f44g",
+    "date": "1944-06-10",
+    "theater": "west",
+    "dateline": "ORADOUR-SUR-GLANE",
+    "headline": "Village destroyed and its people killed by Waffen-SS unit",
+    "body": "Soldiers of the SS 'Das Reich' division kill 643 men, women and children in the village of Oradour-sur-Glane in central France and burn it.",
+    "context": "The ruins were preserved after the war as a memorial and remain standing today.",
+    "sources": [
+      "ushmm",
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r44e",
+    "date": "1944-06-12",
+    "theater": "west",
+    "person": "marthe",
+    "body": "The Americans have set up in the next field. One boy fixed our cart axle and would take nothing but milk. There is fighting toward Carentan; we hear it at night.",
+    "groundedIn": [
+      "f44h"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f44h",
+    "date": "1944-06-12",
+    "theater": "west",
+    "dateline": "CARENTAN",
+    "headline": "US forces take Carentan, linking the American beachheads",
+    "body": "Paratroopers of the 101st Airborne capture the town, joining Utah and Omaha into one front.",
+    "sources": [
+      "nww2"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f44i",
+    "date": "1944-06-13",
+    "theater": "britain",
+    "dateline": "LONDON",
+    "headline": "First V-1 flying bombs fall on London",
+    "body": "Germany launches pilotless jet-powered bombs from northern France. The first to hit London lands in Bethnal Green, killing six people.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r44f",
+    "date": "1944-06-13",
+    "time": "23:00",
+    "theater": "britain",
+    "person": "edith",
+    "body": "Odd noise tonight like a motorbike in the sky, then it cut out, then the bang. Over Bethnal Green way. Not a plane. Nobody at the post can say what it is.",
+    "groundedIn": [
+      "f44i"
+    ]
+  }
+]

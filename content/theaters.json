@@ -1,0 +1,30 @@
+[
+  {
+    "id": "poland",
+    "label": "Poland"
+  },
+  {
+    "id": "britain",
+    "label": "Britain"
+  },
+  {
+    "id": "west",
+    "label": "Western Europe"
+  },
+  {
+    "id": "atlantic",
+    "label": "Atlantic"
+  },
+  {
+    "id": "americas",
+    "label": "Americas"
+  },
+  {
+    "id": "pacific",
+    "label": "Pacific & Asia"
+  },
+  {
+    "id": "global",
+    "label": "Diplomacy"
+  }
+]

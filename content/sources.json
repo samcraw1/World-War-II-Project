@@ -1,0 +1,46 @@
+[
+  {
+    "id": "iwm",
+    "name": "Imperial War Museums (IWM)"
+  },
+  {
+    "id": "nww2",
+    "name": "The National WWII Museum, New Orleans"
+  },
+  {
+    "id": "nara",
+    "name": "US National Archives (NARA)"
+  },
+  {
+    "id": "tna",
+    "name": "The National Archives (UK)"
+  },
+  {
+    "id": "nhhc",
+    "name": "Naval History and Heritage Command"
+  },
+  {
+    "id": "ushmm",
+    "name": "US Holocaust Memorial Museum"
+  },
+  {
+    "id": "awm",
+    "name": "Australian War Memorial"
+  },
+  {
+    "id": "cwgc",
+    "name": "Commonwealth War Graves Commission"
+  },
+  {
+    "id": "ipn",
+    "name": "Institute of National Remembrance (Poland)"
+  },
+  {
+    "id": "mw",
+    "name": "Museum of the Second World War, Gdańsk"
+  },
+  {
+    "id": "niod",
+    "name": "NIOD Institute for War, Holocaust and Genocide Studies"
+  }
+]

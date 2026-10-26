@@ -1,0 +1,518 @@
+<title>Wartime Wire</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Saira+Stencil+One&display=swap">
+<style>
+/* Layout: sticky control bar over a three-zone desk — day ledger | feed | filters & key; stacks to one column on phones */
+:root{
+  --paper:#e9ece6; --card:#f7f8f4; --ink:#18201c; --muted:#56615a; --line:#c6cdc3; --line-soft:#d9ded5;
+  --record:#22405a; --record-tint:#dde5ea; --recon:#9a5a0c; --recon-tint:#f2e6d3; --focus:#2f6f9a;
+  --sealed:#9aa39b; --bar:#18201c; --bar-fg:#e9ece6;
+  --f-display:"Saira Stencil One","Barlow Condensed",Impact,sans-serif;
+  --f-head:"Barlow Condensed","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#111613; --card:#192019; --ink:#e3e8e1; --muted:#9aa59c; --line:#2e3830; --line-soft:#232b25;
+  --record:#94bcdb; --record-tint:#1b2a35; --recon:#e5a453; --recon-tint:#2e2416; --focus:#8cc3ea; --sealed:#4c564e; --bar:#0a0d0b; --bar-fg:#e3e8e1;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111613; --card:#192019; --ink:#e3e8e1; --muted:#9aa59c; --line:#2e3830; --line-soft:#232b25;
+  --record:#94bcdb; --record-tint:#1b2a35; --recon:#e5a453; --recon-tint:#2e2416; --focus:#8cc3ea; --sealed:#4c564e; --bar:#0a0d0b; --bar-fg:#e3e8e1;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bar);color:var(--bar-fg)}
+.bar-in{max-width:1240px;margin:0 auto;padding-block:10px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.logo{font-family:var(--f-display);font-size:22px;letter-spacing:.02em;line-height:1;white-space:nowrap}
+.logo small{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;opacity:.7;margin-top:3px;text-transform:uppercase}
+.datebox{display:flex;align-items:center;gap:6px;margin-left:auto}
+.datebox .cur{font-family:var(--f-head);font-size:22px;font-weight:600;letter-spacing:.02em;min-width:10.5ch;text-align:center;font-variant-numeric:tabular-nums}
+.datebox .cur span{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;opacity:.7;font-weight:400;text-transform:uppercase}
+.ib{background:transparent;border:1px solid color-mix(in srgb,var(--bar-fg) 35%,transparent);color:var(--bar-fg);border-radius:6px;height:36px;min-width:36px;cursor:pointer;font-size:16px}
+.ib:hover:not(:disabled){background:color-mix(in srgb,var(--bar-fg) 12%,transparent)}
+.ib:disabled{opacity:.35;cursor:default}
+.advance{background:var(--bar-fg);color:var(--bar);border:0;border-radius:6px;height:36px;padding:0 14px;font-family:var(--f-head);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.advance:disabled{opacity:.4;cursor:default}
+
+/* start points */
+.starts{border-bottom:1px solid var(--line)}
+.starts-in{max-width:1240px;margin:0 auto;padding-block:14px;display:grid;grid-template-columns:auto 1fr;gap:10px 16px;align-items:center}
+.label{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.start-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.start{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer;min-width:0}
+.start b{display:block;font-family:var(--f-head);font-size:17px;font-weight:600;letter-spacing:.02em;line-height:1.15}
+.start span{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.start[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+
+/* desk */
+.desk{max-width:1240px;margin:0 auto;padding-block:20px 60px;display:grid;grid-template-columns:200px minmax(0,1fr) 260px;gap:28px;align-items:start}
+.side{min-width:0;position:sticky;top:calc(env(safe-area-inset-top,0px) + 74px);display:grid;gap:18px}
+.ledger{display:grid;gap:2px}
+.ledger h2,.panel h2{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 6px}
+.dayb{display:flex;justify-content:space-between;align-items:baseline;gap:8px;width:100%;text-align:left;background:none;border:0;border-radius:5px;padding:5px 8px;cursor:pointer;font-variant-numeric:tabular-nums}
+.dayb:hover{background:var(--line-soft)}
+.dayb .d{font-family:var(--f-head);font-size:16px;font-weight:600}
+.dayb .n{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.dayb.sealed .d,.dayb.sealed .n{color:var(--sealed)}
+.dayb.sealed .n::before{content:"sealed"}
+.dayb.cur{background:var(--ink);color:var(--paper)}
+.dayb.cur .n{color:inherit;opacity:.75}
+.ledger-note{font-size:12px;color:var(--muted);margin:8px 0 0}
+
+/* feed */
+.feed-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px;margin-bottom:14px}
+.feed-head h1{font-family:var(--f-head);font-size:30px;font-weight:700;letter-spacing:.01em;margin:0;line-height:1.05;text-wrap:balance}
+.feed-head p{margin:2px 0 0;color:var(--muted);font-size:13.5px}
+.scope{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.scope button{background:var(--card);border:0;padding:6px 11px;font-size:13px;cursor:pointer}
+.scope button+button{border-left:1px solid var(--line)}
+.scope button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.feed{display:grid;gap:14px}
+.dayhead{display:flex;align-items:center;gap:12px;margin-top:10px;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.dayhead::after{content:"";flex:1;border-top:1px solid var(--line)}
+.dayhead .new{color:var(--paper);background:var(--ink);padding:1px 7px;border-radius:3px;letter-spacing:.08em}
+
+/* record (fact) card — teletype slip */
+.post{cursor:pointer;min-width:0;text-align:left;width:100%;display:block;font:inherit;color:inherit}
+.rec{background:var(--card);border:1px solid var(--line);border-top:3px double var(--record);padding:14px 16px 12px}
+.rec:hover{border-color:var(--record)}
+.kind{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.rec .kind{color:var(--record)}
+.rec .kind::before{content:"";width:8px;height:8px;background:var(--record)}
+.rec .dl{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:6px}
+.rec h3{font-family:var(--f-mono);font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;line-height:1.35;margin:4px 0 6px}
+.rec p{margin:0;font-size:14.5px}
+.foot{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:3px;padding:0 6px;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+
+/* reconstructed card — social post */
+.rc{background:var(--card);border:1px dashed var(--recon);border-radius:14px;padding:14px 16px 12px}
+.rc:hover{background:var(--recon-tint)}
+.who{display:flex;align-items:center;gap:10px}
+.av{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:var(--f-head);font-weight:700;font-size:16px;background:var(--recon-tint);color:var(--recon);border:1px solid var(--recon)}
+.who-t{min-width:0}
+.who-t b{display:block;font-weight:600;line-height:1.2}
+.who-t span{display:block;font-size:12.5px;color:var(--muted);line-height:1.3}
+.rc .kind{color:var(--recon);margin-left:auto;align-self:flex-start;border:1px dashed var(--recon);border-radius:3px;padding:1px 6px;white-space:nowrap}
+.rc p{margin:10px 0 0;font-size:15px}
+.rc .grounded{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.rc .grounded b{color:var(--record);font-weight:600}
+
+.empty{border:1px dashed var(--line);padding:22px;text-align:center;color:var(--muted);border-radius:8px}
+.empty b{display:block;color:var(--ink);font-family:var(--f-head);font-size:19px;font-weight:600}
+
+/* panel */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:14px}
+.seg{display:grid;gap:4px}
+.seg button{display:flex;justify-content:space-between;align-items:center;text-align:left;background:none;border:1px solid transparent;border-radius:5px;padding:5px 8px;cursor:pointer;font-size:13.5px}
+.seg button[aria-pressed="true"]{border-color:var(--ink);font-weight:600}
+.seg .ct{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.tchip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:3px 10px;font-size:12.5px;cursor:pointer}
+.tchip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.search{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:7px 10px;font-size:14px}
+.clear{justify-self:start;background:none;border:0;padding:0;color:var(--focus);text-decoration:underline;cursor:pointer;font-size:13px}
+.key{font-size:13px;display:grid;gap:10px}
+.key div{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start}
+.sw{width:18px;height:14px;margin-top:3px}
+.sw.r{border:1px solid var(--line);border-top:3px double var(--record);background:var(--card)}
+.sw.c{border:1px dashed var(--recon);border-radius:5px;background:var(--card)}
+.key p{margin:0;color:var(--muted)}
+.key b{color:var(--ink);font-weight:600}
+
+/* dialog */
+dialog{border:0;padding:0;background:var(--card);color:var(--ink);border-radius:12px;width:min(640px,calc(100vw - 32px));max-height:calc(100vh - 48px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,14,12,.55)}
+.dlg{padding:20px 22px 22px;display:grid;gap:14px}
+.dlg-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.x{background:none;border:1px solid var(--line);border-radius:6px;width:34px;height:34px;cursor:pointer;flex:none;font-size:16px}
+.dlg h2{margin:4px 0 0;font-family:var(--f-head);font-size:26px;font-weight:700;line-height:1.1;text-wrap:balance}
+.dlg .body{font-size:16px;margin:0}
+.box{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.box h4{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.box p,.box ul{margin:0;font-size:14px}
+.box ul{padding-left:18px}
+.box.rec-box{border-top:3px double var(--record)}
+.box.rc-box{border:1px dashed var(--recon)}
+.rel{display:grid;gap:6px}
+.rel button{text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:7px 10px;cursor:pointer;font-size:13.5px}
+.rel button small{display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.dlg-nav{display:flex;justify-content:space-between;gap:8px}
+.dlg-nav button{background:none;border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer;font-size:13px}
+.dlg-nav button:disabled{opacity:.4;cursor:default}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:9px 16px;border-radius:6px;font-size:14px;z-index:20}
+
+@keyframes in{from{opacity:.25;transform:translateY(6px)}to{opacity:1;transform:none}}
+.fresh{animation:in .45s ease-out both}
+@media (prefers-reduced-motion:reduce){.fresh{animation:none}}
+
+@media (max-width:1020px){
+  .desk{grid-template-columns:minmax(0,1fr) 250px}
+  .ledger-side{grid-column:1/-1;position:static}
+  .ledger{grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;padding-bottom:4px}
+  .ledger h2,.ledger-note{display:none}
+  .dayb{flex-direction:column;align-items:flex-start;gap:0;border:1px solid var(--line)}
+  .start-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:720px){
+  .desk{grid-template-columns:minmax(0,1fr);gap:18px}
+  .filters-side{position:static;order:-1}
+  .ledger-side{order:-2}
+  .starts-in{grid-template-columns:1fr}
+  .datebox{margin-left:0;width:100%;justify-content:space-between}
+  .datebox .cur{flex:1;min-width:0;font-size:19px}
+  .advance{padding:0 10px;font-size:14px}
+  .feed-head h1{font-size:25px}
+  .key{display:none}
+}
+</style>
+
+<header class="bar wrap">
+  <div class="bar-in">
+    <div class="logo">Wartime Wire<small>Private prototype · day by day</small></div>
+    <div class="datebox">
+      <button class="ib" id="prev" aria-label="Previous day">‹</button>
+      <div class="cur" id="curDate" aria-live="polite"></div>
+      <button class="ib" id="next" aria-label="Next day">›</button>
+      <button class="advance" id="advance">Advance a day</button>
+    </div>
+  </div>
+</header>
+
+<section class="starts wrap" aria-label="Start points">
+  <div class="starts-in">
+    <div class="label">Begin on</div>
+    <div class="start-list" id="starts"></div>
+  </div>
+</section>
+
+<main class="desk wrap">
+  <aside class="side ledger-side" aria-label="Days">
+    <div class="ledger" id="ledger"></div>
+  </aside>
+
+  <section aria-label="Feed" style="min-width:0">
+    <div class="feed-head">
+      <div>
+        <h1 id="feedTitle"></h1>
+        <p id="feedSub"></p>
+      </div>
+      <div class="scope" role="group" aria-label="Feed scope">
+        <button id="scopeAll" aria-pressed="true">Everything so far</button>
+        <button id="scopeDay" aria-pressed="false">This day only</button>
+      </div>
+    </div>
+    <div class="feed" id="feed"></div>
+  </section>
+
+  <aside class="side filters-side" aria-label="Filters">
+    <div class="panel">
+      <div>
+        <h2>Show</h2>
+        <div class="seg" id="kindSeg"></div>
+      </div>
+      <div>
+        <h2>Theater</h2>
+        <div class="chips" id="theaters"></div>
+      </div>
+      <div>
+        <h2><label for="q">Search revealed posts</label></h2>
+        <input class="search" id="q" type="search" placeholder="Westerplatte, sirens, radio…" autocomplete="off">
+      </div>
+      <button class="clear" id="clear" hidden>Clear filters</button>
+    </div>
+    <div class="panel key">
+      <h2 style="margin:0">How to read the feed</h2>
+      <div><span class="sw r"></span><p><b>Historical record.</b> Documented events, written as plain wire copy. Dates and times are local to the event.</p></div>
+      <div><span class="sw c"></span><p><b>Reconstructed.</b> Social-style posts from invented composite people. Their words are fiction; each one links to the records it is built on.</p></div>
+      <p>No real person is quoted or impersonated. Posts unlock only as you advance, so later events stay sealed.</p>
+    </div>
+  </aside>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"><div class="dlg" id="dlgBody"></div></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+/* ---------- seed data ---------- */
+const THEATERS = {
+  poland:"Poland", britain:"Britain", west:"Western Europe", atlantic:"Atlantic",
+  americas:"Americas", pacific:"Pacific & Asia", global:"Diplomacy"
+};
+const PEOPLE = {
+  tomasz:{name:"Tomasz W.", role:"Tram conductor · Warsaw", ini:"TW"},
+  edith:{name:"Edith P.", role:"Air-raid warden · Bermondsey, London", ini:"EP"},
+  joan:{name:"Joan M.", role:"Mother of three · Liverpool", ini:"JM"},
+  ray:{name:"Ray D.", role:"Machinist · Dayton, Ohio", ini:"RD"},
+  willem:{name:"Willem de V.", role:"Shipping clerk · Rotterdam", ini:"WV"},
+  arthur:{name:"Arthur B.", role:"Retired railwayman · Kent", ini:"AB"},
+  mae:{name:"Mae K.", role:"Telephone operator · Honolulu", ini:"MK"},
+  harold:{name:"Cpl. Harold T.", role:"US paratrooper · Normandy", ini:"HT"},
+  marthe:{name:"Marthe L.", role:"Dairy farmer · Cotentin, Normandy", ini:"ML"}
+};
+const START_POINTS = [
+  {id:"sep1939", label:"31 Aug 1939", title:"The war begins in Poland", from:"1939-08-31", to:"1939-09-17"},
+  {id:"may1940", label:"10 May 1940", title:"Attack in the West", from:"1940-05-10", to:"1940-05-15"},
+  {id:"dec1941", label:"7 Dec 1941", title:"Pearl Harbor & the Pacific", from:"1941-12-07", to:"1941-12-11"},
+  {id:"jun1944", label:"5 Jun 1944", title:"D-Day & Normandy", from:"1944-06-05", to:"1944-06-13"}
+];
+const REF = {
+  iwm:"Imperial War Museums (IWM)", nww2:"The National WWII Museum, New Orleans", nara:"US National Archives (NARA)",
+  tna:"The National Archives (UK)", nhhc:"Naval History and Heritage Command", ushmm:"US Holocaust Memorial Museum",
+  awm:"Australian War Memorial", cwgc:"Commonwealth War Graves Commission", ipn:"Institute of National Remembrance (Poland)",
+  mw:"Museum of the Second World War, Gdańsk", niod:"NIOD Institute for War, Holocaust and Genocide Studies"
+};
+// k: f = historical record, r = reconstructed. g = record ids a reconstructed post is grounded in.
+const POSTS = [
+ // ---- 1939 ----
+ {id:"f39a",k:"f",d:"1939-08-31",t:"20:00",th:"poland",dl:"GLEIWITZ (GLIWICE), UPPER SILESIA",h:"Staged 'Polish' raid on German radio station",b:"SS men posing as Polish insurgents seize the German radio transmitter at Gleiwitz and broadcast a short message. Berlin will cite the incident as provocation.",c:"The Gleiwitz incident was one of several false-flag operations staged by the SS on the night of 31 August to give Germany a pretext for invading Poland. It was planned by the Sicherheitsdienst (SD).",r:["iwm","mw"]},
+ {id:"f39b",k:"f",d:"1939-08-31",th:"britain",dl:"LONDON",h:"Government orders evacuation of children to begin tomorrow",b:"Schools in London and other cities are told to assemble pupils on 1 September for evacuation to the countryside under the government scheme.",c:"Operation Pied Piper moved roughly 1.5 million people, most of them schoolchildren, mothers with young children, and teachers, in the first days of September 1939.",r:["iwm","tna"]},
+ {id:"r39a",k:"r",d:"1939-08-31",t:"21:30",th:"britain",p:"edith",b:"Another round of blackout checks on our streets tonight. Mrs. Clarke at no. 14 still has a gap you could drive a bus through. Sandbags at the post are finally stacked. Everyone keeps saying it'll blow over.",g:["f39b"]},
+
+ {id:"f39c",k:"f",d:"1939-09-01",t:"04:45",th:"poland",dl:"DANZIG · WESTERPLATTE",h:"German battleship opens fire on Polish garrison at Westerplatte",b:"The old battleship Schleswig-Holstein, on a 'courtesy visit' to Danzig, shells the Polish Military Transit Depot on the Westerplatte peninsula. A small garrison holds its positions.",c:"These are among the first shots of the war in Europe. The Westerplatte garrison numbered roughly 200 men and was expected to hold for 12 hours.",r:["mw","iwm"]},
+ {id:"f39d",k:"f",d:"1939-09-01",t:"04:40",th:"poland",dl:"WIELUŃ",h:"Luftwaffe bombs the town of Wieluń",b:"Dive-bombers attack Wieluń, a small town near the German border with no significant military target. The hospital is among the buildings hit; heavy civilian casualties are reported.",c:"The raid on Wieluń is often cited as one of the first aerial bombings of the war and an early attack on civilians.",r:["ipn","mw"]},
+ {id:"f39e",k:"f",d:"1939-09-01",t:"06:00",th:"poland",dl:"WARSAW",h:"German forces cross the Polish frontier on three sides",b:"Without a declaration of war, German army groups advance into Poland from Pomerania and East Prussia in the north, from Silesia in the west, and from Slovakia in the south.",c:"Germany committed some 1.5 million troops to the invasion. Poland had been only partially mobilised.",r:["iwm","nww2"]},
+ {id:"f39f",k:"f",d:"1939-09-01",th:"britain",dl:"LONDON",h:"Evacuation begins; blackout in force across Britain",b:"Trains carry the first evacuees out of the cities. A nationwide blackout begins at sunset. Britain and France order general mobilisation.",r:["iwm","tna"]},
+ {id:"f39g",k:"f",d:"1939-09-01",th:"global",dl:"ROME",h:"Italy declares itself 'non-belligerent'",b:"Mussolini's government announces that Italy will not take military action for the time being, despite its alliance with Germany.",r:["iwm"]},
+ {id:"r39b",k:"r",d:"1939-09-01",t:"07:10",th:"poland",p:"tomasz",b:"Sirens at dawn and nobody knew if it was a drill. The radio says the Germans crossed the border in the night. My first run of the day and the car was silent. A woman held her bread like someone would take it.",g:["f39e","f39c"]},
+ {id:"r39c",k:"r",d:"1939-09-01",t:"09:15",th:"britain",p:"joan",b:"Walked the two eldest to school with their gas masks in boxes and labels pinned to their coats. Didn't know where the train goes. Teacher says we'll get a postcard. The little one doesn't understand why she can't go too.",g:["f39f","f39b"]},
+
+ {id:"f39h",k:"f",d:"1939-09-02",th:"britain",dl:"HOUSE OF COMMONS",h:"Chamberlain's statement on Poland met with anger in the Commons",b:"The Prime Minister tells MPs that Germany has been asked to withdraw but sets no deadline. Members on all sides react angrily to the delay, and the Cabinet presses for an ultimatum.",c:"The evening session of 2 September is remembered as a turning point. Ministers told Chamberlain that the government might fall unless an ultimatum was issued.",r:["tna"]},
+ {id:"f39i",k:"f",d:"1939-09-02",th:"poland",dl:"WESTERPLATTE",h:"Westerplatte holds under heavy dive-bombing",b:"The garrison survives a major Luftwaffe attack. German assaults on the peninsula have so far failed.",r:["mw"]},
+
+ {id:"f39j",k:"f",d:"1939-09-03",t:"09:00",th:"global",dl:"BERLIN",h:"British ultimatum delivered: withdraw from Poland by 11 a.m.",b:"Britain's ambassador hands the German government a final note. If no assurance is given by 11:00 British time, a state of war will exist.",r:["tna","iwm"]},
+ {id:"f39k",k:"f",d:"1939-09-03",t:"11:15",th:"britain",dl:"LONDON · BBC",h:"Britain is at war with Germany",b:"Neville Chamberlain announces in a radio broadcast from Downing Street that no reply has been received and that Britain is therefore at war.",c:"Australia and New Zealand declared war the same day. France's ultimatum expired at 17:00.",r:["tna","iwm"]},
+ {id:"f39l",k:"f",d:"1939-09-03",t:"17:00",th:"west",dl:"PARIS",h:"France at war with Germany",b:"The French ultimatum expires without reply. France is now at war alongside Britain.",r:["iwm"]},
+ {id:"f39m",k:"f",d:"1939-09-03",th:"global",dl:"CANBERRA · WELLINGTON",h:"Australia and New Zealand declare war",b:"Prime Minister Robert Menzies tells Australians by radio that their country is also at war. New Zealand follows.",r:["awm"]},
+ {id:"f39n",k:"f",d:"1939-09-03",t:"19:40",th:"atlantic",dl:"NORTH ATLANTIC, WEST OF THE HEBRIDES",h:"Liner Athenia torpedoed without warning",b:"The passenger liner SS Athenia, bound from Glasgow for Montreal with more than 1,100 people aboard, is torpedoed by the German submarine U-30. More than 110 people are killed, including Americans.",c:"Germany denied responsibility for years. The sinking violated the prize rules Germany had agreed to and fed fears of unrestricted submarine warfare.",r:["iwm","nhhc"]},
+ {id:"r39d",k:"r",d:"1939-09-03",t:"11:40",th:"britain",p:"edith",b:"Heard it on the wireless at the post, then not ten minutes later the sirens went. We had people into the shelter in their Sunday clothes. All clear came soon after. False alarm. My hands still haven't stopped.",g:["f39k"]},
+ {id:"r39e",k:"r",d:"1939-09-03",t:"12:05",th:"americas",p:"ray",b:"Dad had the Philco up loud before church let out. England's in it now. Fellas at the corner say it's Europe's business and not ours. Most of them were saying the same thing in 1917, Dad says.",g:["f39k"]},
+
+ {id:"f39o",k:"f",d:"1939-09-04",th:"britain",dl:"NORTH SEA",h:"RAF raids German warships at Wilhelmshaven and Brunsbüttel",b:"Blenheim and Wellington bombers attack the German fleet in the first RAF offensive operation of the war. Several aircraft are lost; damage to the ships is light.",r:["iwm"]},
+ {id:"f39p",k:"f",d:"1939-09-05",th:"americas",dl:"WASHINGTON",h:"United States proclaims neutrality",b:"President Roosevelt issues a proclamation of neutrality in the European war, invoking existing neutrality laws.",c:"In a fireside chat two days earlier, Roosevelt had said the nation would remain neutral but could not ask every American to remain neutral in thought.",r:["nara"]},
+ {id:"f39q",k:"f",d:"1939-09-06",th:"poland",dl:"KRAKÓW",h:"German troops enter Kraków",b:"Poland's former royal capital is occupied as German forces push on from the south-west. The Polish government is moving east from Warsaw.",r:["ipn"]},
+ {id:"f39r",k:"f",d:"1939-09-06",th:"global",dl:"CAPE TOWN",h:"South Africa declares war",b:"After a split in the cabinet, Jan Smuts replaces J.B.M. Hertzog as Prime Minister, and South Africa declares war on Germany.",r:["iwm"]},
+ {id:"r39f",k:"r",d:"1939-09-06",th:"britain",p:"joan",b:"Postcard came! They're on a farm in Wales. Our Billy has seen a cow up close and is not impressed. Their lady sounds kind. House is far too quiet.",g:["f39f"]},
+
+ {id:"f39s",k:"f",d:"1939-09-07",th:"poland",dl:"WESTERPLATTE",h:"Westerplatte garrison surrenders after seven days",b:"Out of ammunition and supplies and with many wounded, the Polish defenders capitulate. They had been expected to hold for hours.",c:"The defence of Westerplatte became a lasting symbol of Polish resistance.",r:["mw","ipn"]},
+ {id:"f39t",k:"f",d:"1939-09-07",th:"west",dl:"SAARLAND",h:"French troops advance into the Saar",b:"French divisions move a few kilometres into German territory near Saarbrücken in a limited offensive. German forces fall back to the Siegfried Line.",c:"The Saar Offensive was halted within days, and French troops withdrew in October. It did little to relieve Poland.",r:["iwm"]},
+ {id:"r39g",k:"r",d:"1939-09-07",t:"19:00",th:"poland",p:"tomasz",b:"Polish Radio said Westerplatte has fallen. A whole week. Men on my tram took their hats off. We are digging trenches in the parks now, all of us, clerks and grandmothers.",g:["f39s"]},
+ {id:"f39u",k:"f",d:"1939-09-08",th:"poland",dl:"WARSAW",h:"German armour reaches Warsaw's outskirts and is driven back",b:"Panzer units attack the south-western districts of Ochota and Wola. Polish troops and civilian volunteers repel the assault.",r:["ipn","mw"]},
+ {id:"f39v",k:"f",d:"1939-09-09",th:"poland",dl:"RIVER BZURA",h:"Polish counter-attack opens on the Bzura",b:"The Polish armies 'Poznań' and 'Pomorze' strike south into the flank of the German Eighth Army west of Warsaw. It is the largest battle of the campaign.",r:["ipn","iwm"]},
+ {id:"f39w",k:"f",d:"1939-09-10",th:"americas",dl:"OTTAWA",h:"Canada declares war on Germany",b:"Parliament approves the declaration a week after Britain's. Canada makes the decision on its own, a sign of its independence within the Commonwealth.",r:["iwm"]},
+ {id:"r39h",k:"r",d:"1939-09-12",th:"poland",p:"tomasz",b:"No trams now. The lines are cut. I carry water for the building in two buckets from the pump on the square. Bread queue at 5 a.m. Shelling at night from the west.",g:["f39u"]},
+ {id:"f39x",k:"f",d:"1939-09-17",t:"03:00",th:"poland",dl:"EASTERN POLAND",h:"Soviet Union invades Poland from the east",b:"The Red Army crosses Poland's eastern border, in line with the secret protocol of the August pact between Germany and the USSR.",c:"The Molotov–Ribbentrop Pact of 23 August 1939 had divided Eastern Europe into German and Soviet spheres.",r:["ipn","iwm","ushmm"]},
+ {id:"r39i",k:"r",d:"1939-09-17",t:"14:00",th:"poland",p:"tomasz",b:"People on the stairs say the Soviets have crossed in the east. Someone laughed, then stopped. Nobody knows where the government is.",g:["f39x"]},
+
+ // ---- 1940 ----
+ {id:"f40a",k:"f",d:"1940-05-10",t:"04:30",th:"west",dl:"THE HAGUE · BRUSSELS · LUXEMBOURG",h:"Germany invades the Netherlands, Belgium and Luxembourg",b:"German forces attack the three neutral countries at dawn. Paratroopers land near The Hague and Rotterdam to seize airfields and bridges.",r:["niod","iwm"]},
+ {id:"f40b",k:"f",d:"1940-05-10",th:"west",dl:"EBEN-EMAEL, BELGIUM",h:"Glider troops land on Belgian fortress",b:"German airborne engineers land on top of Fort Eben-Emael, one of Europe's strongest fortifications, and disable its guns with shaped charges. The fort surrenders the next day.",r:["iwm"]},
+ {id:"f40c",k:"f",d:"1940-05-10",th:"britain",dl:"LONDON",h:"Churchill becomes Prime Minister",b:"Neville Chamberlain resigns. That evening the King asks Winston Churchill to form a government, which will include Labour and Liberal ministers.",r:["tna","iwm"]},
+ {id:"r40a",k:"r",d:"1940-05-10",t:"08:00",th:"west",p:"willem",b:"Woke to aircraft over the Maas. From the office window you can see parachutes. The radio says hold your positions and stay indoors. Nobody here has ever seen a war.",g:["f40a"]},
+ {id:"f40d",k:"f",d:"1940-05-13",th:"west",dl:"SEDAN, FRANCE",h:"German forces cross the Meuse at Sedan",b:"After heavy air attack, German infantry and engineers force a crossing of the river. The French line begins to give way.",c:"Guderian's panzer corps had moved through the Ardennes, a route French planners had judged unsuitable for armour.",r:["iwm"]},
+ {id:"f40e",k:"f",d:"1940-05-13",th:"britain",dl:"HOUSE OF COMMONS",h:"Churchill's first speech as Prime Minister",b:"Churchill tells MPs that his aim is victory and that he has nothing to offer but hardship and sacrifice. The House approves the new government.",r:["tna"]},
+ {id:"f40f",k:"f",d:"1940-05-14",th:"west",dl:"ROTTERDAM",h:"Rotterdam city centre destroyed by bombing",b:"German bombers strike the city centre while surrender talks are under way. Fires spread across the old city; around 800 to 900 people are killed and tens of thousands made homeless.",r:["niod"]},
+ {id:"f40g",k:"f",d:"1940-05-14",t:"21:00",th:"britain",dl:"LONDON · BBC",h:"Appeal for Local Defence Volunteers",b:"War Secretary Anthony Eden asks men aged 17 to 65 who are not in the forces to register at police stations for a new home defence force.",c:"The LDV was renamed the Home Guard in July 1940. About 250,000 men registered within the first day.",r:["iwm"]},
+ {id:"r40b",k:"r",d:"1940-05-14",t:"22:15",th:"britain",p:"arthur",b:"Heard the appeal at nine and was at the station by half past. Queue already out the door. Sixty-three and I can still read a timetable and hold a rifle. They had no forms left, so they wrote us on the back of lost-dog notices.",g:["f40g"]},
+ {id:"r40c",k:"r",d:"1940-05-14",t:"16:00",th:"west",p:"willem",b:"The office is gone. The whole street. We got out to the park and watched it burn from there. My sister is safe. I don't know about Henk.",g:["f40f"]},
+ {id:"f40h",k:"f",d:"1940-05-15",th:"west",dl:"THE NETHERLANDS",h:"Dutch army capitulates",b:"General Winkelman signs the surrender of Dutch forces in most of the country. Queen Wilhelmina and the government have gone to London.",r:["niod"]},
+
+ // ---- 1941 ----
+ {id:"f41a",k:"f",d:"1941-12-07",t:"07:48",th:"pacific",dl:"PEARL HARBOR, OAHU",h:"Japanese aircraft attack the US Pacific Fleet",b:"Carrier-based Japanese planes strike the fleet at anchor and nearby airfields in two waves. Eight battleships are damaged or sunk; USS Arizona explodes and sinks.",c:"2,403 Americans were killed and 1,178 wounded. The US carriers were at sea and escaped.",r:["nhhc","nww2","nara"]},
+ {id:"f41b",k:"f",d:"1941-12-07",t:"14:26",th:"americas",dl:"NEW YORK · RADIO",h:"First bulletins interrupt Sunday broadcasts",b:"Radio networks break into programmes on the US mainland with news of the attack. Crowds gather outside newspaper offices.",r:["nara"]},
+ {id:"r41a",k:"r",d:"1941-12-07",t:"08:20",th:"pacific",p:"mae",b:"Every line on the board lit up at once. Smoke coming up over the harbor. A man shouting that it isn't practice. I'm patching calls and I can't stop to look out the window.",g:["f41a"]},
+ {id:"r41b",k:"r",d:"1941-12-07",t:"14:50",th:"americas",p:"ray",b:"Football on the radio and then a man cut in. Pearl Harbor. Had to find it on the atlas. Ma's sitting at the kitchen table and hasn't moved.",g:["f41b","f41a"]},
+ {id:"f41c",k:"f",d:"1941-12-08",th:"pacific",dl:"MALAYA · HONG KONG · PHILIPPINES",h:"Japan attacks across Asia and the Pacific",b:"Japanese troops land at Kota Bharu in Malaya and attack Hong Kong. Aircraft destroy much of the US air force in the Philippines on the ground at Clark Field. Guam and Wake Island are struck.",c:"Because of the date line, these attacks fell on 8 December local time but within hours of Pearl Harbor.",r:["iwm","nww2"]},
+ {id:"f41d",k:"f",d:"1941-12-08",t:"12:30",th:"americas",dl:"WASHINGTON",h:"Roosevelt asks Congress to declare war on Japan",b:"In a short address to a joint session, the President describes the previous day as one that will live in infamy. Congress votes for war within the hour, with one dissenting vote.",r:["nara"]},
+ {id:"f41e",k:"f",d:"1941-12-08",th:"britain",dl:"LONDON",h:"Britain declares war on Japan",b:"The British government declares war on Japan following attacks on Malaya and Hong Kong.",r:["tna"]},
+ {id:"r41c",k:"r",d:"1941-12-09",t:"07:00",th:"americas",p:"ray",b:"Line at the recruiting office went round the block by seven. Saw half my shift there. Foreman said the plant's switching over and they'll need us more on the lathes than in uniform. Haven't decided.",g:["f41d"]},
+ {id:"f41f",k:"f",d:"1941-12-10",th:"pacific",dl:"OFF KUANTAN, MALAYA",h:"HMS Prince of Wales and HMS Repulse sunk",b:"Japanese land-based bombers and torpedo planes sink the British battleship and battlecruiser at sea. More than 800 men are lost.",c:"It was the first time capital ships under way at sea were sunk by aircraft alone.",r:["iwm","cwgc"]},
+ {id:"f41g",k:"f",d:"1941-12-11",th:"global",dl:"BERLIN · ROME · WASHINGTON",h:"Germany and Italy declare war on the United States",b:"Hitler announces the declaration in the Reichstag; Italy follows. Congress responds the same day with declarations of war on both.",r:["nara","iwm"]},
+
+ // ---- 1944 ----
+ {id:"f44a",k:"f",d:"1944-06-05",th:"west",dl:"SOUTHWICK HOUSE, PORTSMOUTH",h:"Eisenhower confirms invasion for 6 June",b:"After a one-day postponement for storms, forecasters predict a brief window of better weather. In the early hours the Supreme Commander gives the order to go.",r:["iwm","nww2"]},
+ {id:"f44b",k:"f",d:"1944-06-05",th:"west",dl:"ROME",h:"Allied troops in Rome",b:"The US Fifth Army entered the city late on 4 June. Rome is the first Axis capital to fall to the Allies.",r:["iwm"]},
+ {id:"r44a",k:"r",d:"1944-06-05",t:"21:30",th:"west",p:"harold",b:"Faces blacked, chutes on. They read us a message from Ike on the airfield. Somebody's playing cards on a parachute bag like it's any Monday. Wheels up soon.",g:["f44a"]},
+ {id:"f44c",k:"f",d:"1944-06-06",t:"00:15",th:"west",dl:"NORMANDY",h:"Airborne troops land behind the beaches",b:"British and US paratroopers and glider troops land in darkness to seize bridges and road junctions on both flanks of the invasion area. Many are scattered far from their drop zones.",r:["iwm","nww2"]},
+ {id:"f44d",k:"f",d:"1944-06-06",t:"06:30",th:"west",dl:"NORMANDY COAST",h:"Allied landings on five beaches",b:"US troops land on Utah and Omaha, British on Gold and Sword, Canadians on Juno. Omaha sees the heaviest losses. By nightfall about 156,000 Allied troops are ashore.",c:"Allied casualties on D-Day are estimated at more than 10,000, including about 4,400 dead.",r:["iwm","nww2","cwgc"]},
+ {id:"f44e",k:"f",d:"1944-06-06",t:"09:32",th:"britain",dl:"LONDON · BBC",h:"BBC confirms Allied landings in northern France",b:"A short bulletin tells listeners that Allied naval forces, supported by strong air forces, began landing armies on the northern coast of France that morning.",r:["iwm"]},
+ {id:"r44b",k:"r",d:"1944-06-06",t:"03:10",th:"west",p:"harold",b:"Down in a flooded field. No idea where. Found two guys from another company using the cricket clickers. We're heading toward the church tower we can see. Moving now.",g:["f44c"]},
+ {id:"r44c",k:"r",d:"1944-06-06",t:"06:00",th:"west",p:"marthe",b:"Nobody slept. Aircraft all night, then men with painted faces in our orchard asking the way in terrible French. The cows will not stand still. The sea is grey with ships.",g:["f44c","f44d"]},
+ {id:"r44d",k:"r",d:"1944-06-06",t:"09:45",th:"britain",p:"joan",b:"Wireless on at work, whole floor stopped to listen. It's begun. Our Billy is seventeen now and thank God still in school. Thinking of every mother whose boy is on that beach.",g:["f44e"]},
+ {id:"f44f",k:"f",d:"1944-06-07",th:"west",dl:"BAYEUX",h:"Bayeux liberated",b:"British troops enter Bayeux, the first French town of significance to be freed in the campaign. The town is taken almost undamaged.",r:["iwm"]},
+ {id:"f44g",k:"f",d:"1944-06-10",th:"west",dl:"ORADOUR-SUR-GLANE",h:"Village destroyed and its people killed by Waffen-SS unit",b:"Soldiers of the SS 'Das Reich' division kill 643 men, women and children in the village of Oradour-sur-Glane in central France and burn it.",c:"The ruins were preserved after the war as a memorial and remain standing today.",r:["ushmm","iwm"]},
+ {id:"r44e",k:"r",d:"1944-06-11",th:"west",p:"marthe",b:"The Americans have set up in the next field. One boy fixed our cart axle and would take nothing but milk. There is fighting toward Carentan; we hear it at night.",g:["f44h"]},
+ {id:"f44h",k:"f",d:"1944-06-12",th:"west",dl:"CARENTAN",h:"US forces take Carentan, linking the American beachheads",b:"Paratroopers of the 101st Airborne capture the town, joining Utah and Omaha into one front.",r:["nww2"]},
+ {id:"f44i",k:"f",d:"1944-06-13",th:"britain",dl:"LONDON",h:"First V-1 flying bombs fall on London",b:"Germany launches pilotless jet-powered bombs from northern France. The first to hit London lands in Bethnal Green, killing six people.",r:["iwm"]},
+ {id:"r44f",k:"r",d:"1944-06-13",t:"23:00",th:"britain",p:"edith",b:"Odd noise tonight like a motorbike in the sky, then it cut out, then the bang. Over Bethnal Green way. Not a plane. Nobody at the post can say what it is.",g:["f44i"]}
+];
+
+/* ---------- state ---------- */
+const byId = Object.fromEntries(POSTS.map(p=>[p.id,p]));
+const S = {sp:START_POINTS[0], day:"1939-09-01", scope:"all", kind:"all", theaters:new Set(), q:"", fresh:null};
+const $ = s=>document.querySelector(s);
+const store = {get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* ---------- date helpers (UTC to avoid DST shifts) ---------- */
+const toD = s=>new Date(s+"T00:00:00Z");
+const fmt = (s,o)=>toD(s).toLocaleDateString("en-GB",Object.assign({timeZone:"UTC"},o));
+const addDay = (s,n)=>{const d=toD(s);d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
+function daysOf(sp){const out=[];for(let d=sp.from;d<=sp.to;d=addDay(d,1))out.push(d);return out}
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- selection ---------- */
+function inSp(p){return p.d>=S.sp.from && p.d<=S.sp.to}
+function revealed(){return POSTS.filter(p=>inSp(p) && p.d<=S.day)}
+function matches(p){
+  if(S.kind!=="all" && p.k!==S.kind) return false;
+  if(S.theaters.size && !S.theaters.has(p.th)) return false;
+  if(S.q){const q=S.q.toLowerCase();const who=p.p?PEOPLE[p.p].name+" "+PEOPLE[p.p].role:"";
+    if(!((p.h||"")+" "+p.b+" "+(p.dl||"")+" "+who+" "+(p.c||"")).toLowerCase().includes(q)) return false;}
+  return true;
+}
+function visible(){
+  let list = revealed();
+  if(S.scope==="day") list = list.filter(p=>p.d===S.day);
+  return list.filter(matches).sort((a,b)=> a.d===b.d ? (b.t||"12:00").localeCompare(a.t||"12:00") : b.d.localeCompare(a.d));
+}
+
+/* ---------- render ---------- */
+function cardHTML(p){
+  const time = p.t?`${p.t} local`:"time not recorded";
+  if(p.k==="f") return `<button class="post rec" data-id="${p.id}">
+    <span class="kind">Historical record</span>
+    <div class="dl">${esc(p.dl)} · ${time}</div>
+    <h3>${esc(p.h)}</h3><p>${esc(p.b)}</p>
+    <div class="foot"><span class="chip">${THEATERS[p.th]}</span><span>${p.r.length} reference${p.r.length>1?"s":""}</span></div></button>`;
+  const pp = PEOPLE[p.p];
+  const g = p.g.map(id=>byId[id]).filter(Boolean);
+  return `<button class="post rc" data-id="${p.id}">
+    <div class="who"><span class="av" aria-hidden="true">${pp.ini}</span><span class="who-t"><b>${esc(pp.name)}</b><span>${esc(pp.role)} · ${p.t||"during the day"}</span></span><span class="kind">Reconstructed</span></div>
+    <p>${esc(p.b)}</p>
+    <div class="grounded">Composite voice. Grounded in <b>${g.length} record${g.length>1?"s":""}</b>: ${g.map(x=>esc(x.h)).join("; ")}</div></button>`;
+}
+function render(){
+  const days = daysOf(S.sp);
+  const idx = days.indexOf(S.day);
+  $("#curDate").innerHTML = `${fmt(S.day,{day:"numeric",month:"short",year:"numeric"})}<span>${fmt(S.day,{weekday:"long"})} · day ${idx+1} of ${days.length}</span>`;
+  $("#prev").disabled = idx<=0;
+  $("#next").disabled = $("#advance").disabled = idx>=days.length-1;
+
+  $("#starts").innerHTML = START_POINTS.map(sp=>`<button class="start" data-sp="${sp.id}" aria-pressed="${sp.id===S.sp.id}"><b>${sp.label}</b><span>${sp.title}</span></button>`).join("");
+
+  $("#ledger").innerHTML = `<h2>${S.sp.title}</h2>` + days.map(d=>{
+    const sealed = d>S.day, n = POSTS.filter(p=>p.d===d).length;
+    return `<button class="dayb${sealed?" sealed":""}${d===S.day?" cur":""}" data-day="${d}" aria-current="${d===S.day?"date":"false"}" aria-label="${fmt(d,{day:"numeric",month:"long",year:"numeric"})}${sealed?", sealed":", "+n+" posts"}"><span class="d">${fmt(d,{weekday:"short",day:"numeric",month:"short"})}</span><span class="n">${sealed?"":n+" post"+(n===1?"":"s")}</span></button>`;
+  }).join("") + `<p class="ledger-note">Jumping to a sealed day reveals everything up to it.</p>`;
+
+  const rev = revealed(), list = visible();
+  const fCount = rev.filter(p=>p.k==="f").length, rCount = rev.length-fCount;
+  $("#kindSeg").innerHTML = [["all","All posts",rev.length],["f","Historical records",fCount],["r","Reconstructed",rCount]]
+    .map(([k,l,c])=>`<button data-kind="${k}" aria-pressed="${S.kind===k}"><span>${l}</span><span class="ct">${c}</span></button>`).join("");
+  const thIn = [...new Set(POSTS.filter(inSp).map(p=>p.th))];
+  $("#theaters").innerHTML = thIn.map(t=>`<button class="tchip" data-th="${t}" aria-pressed="${S.theaters.has(t)}">${THEATERS[t]}</button>`).join("");
+  $("#clear").hidden = !(S.kind!=="all"||S.theaters.size||S.q);
+  $("#scopeAll").setAttribute("aria-pressed",S.scope==="all");
+  $("#scopeDay").setAttribute("aria-pressed",S.scope==="day");
+
+  $("#feedTitle").textContent = S.scope==="day" ? fmt(S.day,{weekday:"long",day:"numeric",month:"long",year:"numeric"}) : S.sp.title;
+  $("#feedSub").textContent = S.scope==="day" ? `${list.length} post${list.length===1?"":"s"} shown for this day` :
+    `${list.length} of ${rev.length} revealed posts shown · from ${fmt(S.sp.from,{day:"numeric",month:"short",year:"numeric"})} to ${fmt(S.day,{day:"numeric",month:"short"})}`;
+
+  let html="", last=null;
+  for(const p of list){
+    if(p.d!==last){last=p.d;html+=`<div class="dayhead">${fmt(p.d,{weekday:"long",day:"numeric",month:"long",year:"numeric"})}${p.d===S.fresh?' <span class="new">New today</span>':""}</div>`;}
+    html+=cardHTML(p).replace('class="post', p.d===S.fresh?'class="fresh post':'class="post');
+  }
+  if(!list.length){
+    const quiet = !rev.some(p=>S.scope!=="day"||p.d===S.day);
+    html = quiet ? `<div class="empty"><b>Quiet on the wire</b>No posts are seeded for this day in the prototype. Advance to keep going.</div>`
+                 : `<div class="empty"><b>No posts match these filters</b>Try another theater or clear the search.</div>`;
+  }
+  $("#feed").innerHTML = html;
+  store.set("ww-state",{sp:S.sp.id,day:S.day,scope:S.scope,kind:S.kind,th:[...S.theaters]});
+}
+
+/* ---------- detail ---------- */
+let dlgList=[];
+function openPost(id){
+  const p=byId[id]; if(!p) return;
+  dlgList = visible().map(x=>x.id);
+  const i = dlgList.indexOf(id);
+  const when = `${fmt(p.d,{weekday:"long",day:"numeric",month:"long",year:"numeric"})}${p.t?" · "+p.t+" local":""}`;
+  let html;
+  if(p.k==="f"){
+    const rel = POSTS.filter(x=>x.k==="r" && x.g.includes(p.id) && x.d<=S.day && inSp(x));
+    html = `<div class="dlg-top"><div><span class="kind" style="color:var(--record)">■ Historical record</span><h2 id="dlgTitle">${esc(p.h)}</h2></div><button class="x" id="x" aria-label="Close">✕</button></div>
+      <div class="label">${esc(p.dl)} · ${when} · ${THEATERS[p.th]}</div>
+      <p class="body">${esc(p.b)}</p>
+      ${p.c?`<div class="box rec-box"><h4>Context</h4><p>${esc(p.c)}</p></div>`:""}
+      <div class="box"><h4>Corroborate with</h4><ul>${p.r.map(r=>`<li>${REF[r]}</li>`).join("")}</ul><p style="margin-top:6px;color:var(--muted);font-size:12.5px">Prototype note: wording is paraphrased. Production records should cite specific documents.</p></div>
+      ${rel.length?`<div><div class="label" style="margin-bottom:6px">Reconstructed posts built on this record</div><div class="rel">${rel.map(x=>`<button data-open="${x.id}"><small>${PEOPLE[x.p].name} · ${fmt(x.d,{day:"numeric",month:"short"})}</small>${esc(x.b.slice(0,90))}…</button>`).join("")}</div></div>`:""}`;
+  } else {
+    const pp=PEOPLE[p.p], g=p.g.map(x=>byId[x]);
+    html = `<div class="dlg-top"><div class="who"><span class="av">${pp.ini}</span><span class="who-t"><b id="dlgTitle">${esc(pp.name)}</b><span>${esc(pp.role)}</span></span></div><button class="x" id="x" aria-label="Close">✕</button></div>
+      <div class="label">${when} · ${THEATERS[p.th]}</div>
+      <p class="body">${esc(p.b)}</p>
+      <div class="box rc-box"><h4>What is invented</h4><p>${esc(pp.name)} is a composite character, not a real person. The words, feelings and small details are fiction written to show how ordinary people might have experienced the day.</p></div>
+      <div><div class="label" style="margin-bottom:6px">What is documented</div><div class="rel">${g.map(x=>`<button data-open="${x.id}"><small>Historical record · ${fmt(x.d,{day:"numeric",month:"short",year:"numeric"})}</small>${esc(x.h)}</button>`).join("")}</div></div>`;
+  }
+  html += `<div class="dlg-nav"><button id="dprev" ${i<=0?"disabled":""}>‹ Newer</button><button id="dnext" ${i<0||i>=dlgList.length-1?"disabled":""}>Older ›</button></div>`;
+  $("#dlgBody").innerHTML = html;
+  const d=$("#dlg"); if(!d.open) d.showModal();
+  $("#x").onclick=()=>d.close();
+  $("#dprev").onclick=()=>openPost(dlgList[i-1]);
+  $("#dnext").onclick=()=>openPost(dlgList[i+1]);
+  $("#dlgBody").querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openPost(b.dataset.open));
+}
+$("#dlg").addEventListener("click",e=>{if(e.target===e.currentTarget)e.currentTarget.close()});
+
+/* ---------- actions ---------- */
+let toastT;
+function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2200)}
+function goTo(day,announce){
+  const forward = day>S.day;
+  const before = revealed().length;
+  S.day=day; S.fresh = forward?day:null;
+  render();
+  if(forward && announce){const n=revealed().length-before;toast(n?`${n} new post${n===1?"":"s"} unsealed`:"No new posts on this day")}
+}
+function setStart(id){S.sp=START_POINTS.find(s=>s.id===id);S.day=S.sp.from;S.fresh=S.day;S.theaters.clear();render();window.scrollTo({top:0})}
+
+$("#advance").onclick=()=>goTo(addDay(S.day,1),true);
+$("#next").onclick=()=>goTo(addDay(S.day,1),true);
+$("#prev").onclick=()=>goTo(addDay(S.day,-1));
+$("#starts").onclick=e=>{const b=e.target.closest("[data-sp]");if(b)setStart(b.dataset.sp)};
+$("#ledger").onclick=e=>{const b=e.target.closest("[data-day]");if(b)goTo(b.dataset.day,true)};
+$("#kindSeg").onclick=e=>{const b=e.target.closest("[data-kind]");if(b){S.kind=b.dataset.kind;render()}};
+$("#theaters").onclick=e=>{const b=e.target.closest("[data-th]");if(!b)return;const t=b.dataset.th;S.theaters.has(t)?S.theaters.delete(t):S.theaters.add(t);render()};
+$("#q").oninput=e=>{S.q=e.target.value.trim();render()};
+$("#clear").onclick=()=>{S.kind="all";S.theaters.clear();S.q="";$("#q").value="";render()};
+$("#scopeAll").onclick=()=>{S.scope="all";render()};
+$("#scopeDay").onclick=()=>{S.scope="day";render()};
+$("#feed").onclick=e=>{const b=e.target.closest("[data-id]");if(b)openPost(b.dataset.id)};
+document.addEventListener("keydown",e=>{
+  if($("#dlg").open||e.target.matches("input"))return;
+  if(e.key==="ArrowRight"&&!$("#next").disabled)$("#next").click();
+  if(e.key==="ArrowLeft"&&!$("#prev").disabled)$("#prev").click();
+});
+
+/* ---------- boot ---------- */
+(function(){
+  const h=location.hash.slice(1), saved=store.get("ww-state");
+  const sp = START_POINTS.find(s=>s.id===h) || (saved&&START_POINTS.find(s=>s.id===saved.sp));
+  if(sp){S.sp=sp;
+    if(saved&&saved.sp===sp.id&&saved.day>=sp.from&&saved.day<=sp.to){S.day=saved.day;S.scope=saved.scope||"all";S.kind=saved.kind||"all";(saved.th||[]).forEach(t=>S.theaters.add(t))}
+    else S.day=sp.from;}
+  render();
+})();
+</script>
