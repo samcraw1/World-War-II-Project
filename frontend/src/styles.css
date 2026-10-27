@@ -47,3 +47,15 @@ body {
 }
 .day-nav button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .day-nav button:disabled { opacity: 0.35; cursor: default; }
+
+.day-nav-index { color: var(--muted); font-size: 0.9rem; align-self: center; text-decoration: none; }
+.day-nav-index:hover { color: var(--accent); }
+
+.story-pic { display: block; max-width: 100%; height: auto; margin: 0 0 1.5rem; border: 1px solid var(--line); border-radius: 4px; }
+
+.index-month h3 { margin: 2rem 0 0.5rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.9rem; font-weight: 400; }
+.index-month ul { list-style: none; margin: 0; padding: 0; }
+.index-month li { border-bottom: 1px solid var(--line); }
+.index-month a { display: block; padding: 0.5rem 0; color: var(--text); text-decoration: none; }
+.index-month a:hover { color: var(--accent); }
+.index-date { display: inline-block; width: 2rem; color: var(--muted); }

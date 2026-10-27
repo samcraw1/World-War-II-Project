@@ -30,4 +30,10 @@ export type Timeline = {
     title: string
     story: string
     date: string
+    pic?: string | null
+}
+
+export type TimelineDay = {
+    date: string
+    title: string
 }

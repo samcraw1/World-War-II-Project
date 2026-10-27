@@ -6,10 +6,26 @@ import { currentWarDate } from './warDate';
 const router = express.Router();
 
 
+// Every day unlocked so far, for the index page. Future days stay hidden.
+router.get('/timeline', async (request, response) => {
+    try {
+        const { rows: getDays } = await db.query(
+            `SELECT to_char(date, 'YYYY-MM-DD') AS date, title
+             FROM timeline WHERE date <= $1 ORDER BY date`,
+            [currentWarDate()]
+        );
+
+        response.json(getDays);
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 router.get('/timeline/today', async (request, response) => {
     try {
         const { rows: [getToday] } = await db.query(
-            'SELECT id, title, story, date FROM timeline WHERE date = $1 LIMIT 1',
+            'SELECT id, title, story, date, pic FROM timeline WHERE date = $1 LIMIT 1',
             [currentWarDate()]
         );
 
@@ -38,7 +54,7 @@ router.get('/timeline/:date', async (request, response) => {
         }
 
         const { rows: [getDay] } = await db.query(
-            'SELECT id, title, story, date FROM timeline WHERE date = $1 LIMIT 1',
+            'SELECT id, title, story, date, pic FROM timeline WHERE date = $1 LIMIT 1',
             [date]
         );
 

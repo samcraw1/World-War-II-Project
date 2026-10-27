@@ -1,1 +1,1 @@
-export type { Timeline as TimelineEvent } from '../../backend/type';
+export type { Timeline as TimelineEvent, TimelineDay } from '../../backend/type';
