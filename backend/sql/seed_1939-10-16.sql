@@ -1,15 +1,13 @@
 INSERT INTO timeline (title, story, date) VALUES (
-    'The Raid on the Forth',
-    $story$Monday, 16 October 1939. Barely a day after the loss of HMS Royal Oak, the war comes to the British mainland from the air. For the first time, the Luftwaffe attacks Britain, and the RAF fights back over British soil.
+    'The War Reaches British Skies',
+    $story$Monday, 16 October 1939. Two days after U-47 slipped into Scapa Flow, the war comes to Britain from the air.
 
-The morning brings a warning. At 09:20 the Chain Home radar at Drone Hill picks up two intruders over the North Sea, and Spitfires of 602 Squadron are scrambled. They are too late and too far away to stop a lone Heinkel 111 scouting the Firth of Forth, which gets home safely.
+Nine German Luftwaffe aircraft raid the Firth of Forth, in eastern Scotland, where Royal Navy ships are anchored. The cruisers Southampton and Edinburgh and the destroyer Mohawk are damaged, and sixteen Royal Navy crewmen are killed.
 
-The real attack comes after lunch. Twelve Junkers Ju 88 bombers of I./KG 30 cross the North Sea hunting the battlecruiser HMS Hood, which they believe is at Rosyth. They have orders not to bomb targets on land, so the crews go after ships at anchor or under way. Around 14:30 the bombers dive on the cruisers Southampton and Edinburgh. One bomb falls beside the destroyer HMS Mohawk, killing thirteen ratings and two officers; her captain is mortally wounded. In all sixteen British sailors die and 44 are wounded. No ship is sunk.
+The raiders do not get away unharmed. Spitfires of No. 603 Squadron arrive and shoot down three of the attackers, described as the first German aircraft to be downed over British territory in the war.
 
-The defenders are weekend flyers. 603 Squadron (City of Edinburgh) and 602 Squadron (City of Glasgow) belong to the Auxiliary Air Force, part-time airmen who have trained in their spare time for years. About 14:45 Flight Lieutenant Pat Gifford of 603 finishes off the Ju 88 of Oberleutnant Hans Storp, which crashes into the Forth off Prestonpans. Minutes later Flight Lieutenant George Pinkerton of 602 chases down the aircraft of Hauptmann Helmuth Pohle, which ditches off Crail. Pohle is the only survivor of his crew. A third bomber, badly damaged, limps as far as the Netherlands and crashes with the loss of its crew.
+Far to the east, the occupation of Poland grinds on. The Nazi authorities order all Poles out of the port city of Gdynia, part of the German policy of clearing and resettling the territory they have seized.
 
-Gifford and Pinkerton will each receive the Distinguished Flying Cross. The fishermen who pull German airmen from the water treat them with courtesy, and the dead are later buried with full military honours.
-
-The raid does little damage. Its meaning lies elsewhere. The Auxiliaries have shown they are as good as the regulars, the radar and control chain has worked, and Britain now knows what an air attack on the home front looks like.$story$,
+In New York, far from the fighting, Broadway opens a new comedy, The Man Who Came to Dinner, at the Music Box Theatre. For Britain, though, the day's lesson is plain: the sea war has been joined by an air war.$story$,
     '1939-10-16'
 ) ON CONFLICT (date) DO UPDATE SET title = EXCLUDED.title, story = EXCLUDED.story;

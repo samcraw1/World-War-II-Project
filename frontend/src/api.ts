@@ -1,8 +1,12 @@
 import type { TimelineEvent } from './types';
 
-export async function fetchToday(): Promise<TimelineEvent | null> {
-    const res = await fetch('/api/timeline/today');
+async function fetchEntry(path: string): Promise<TimelineEvent | null> {
+    const res = await fetch(path);
     if (res.status === 404) return null;
     if (!res.ok) throw new Error(`Request failed: ${res.status}`);
     return res.json();
 }
+
+export const fetchToday = () => fetchEntry('/api/timeline/today');
+
+export const fetchByDate = (date: string) => fetchEntry(`/api/timeline/${date}`);

@@ -2,7 +2,9 @@ import express from 'express';
 import { db } from './db';
 import { currentWarDate } from './warDate';
 
+
 const router = express.Router();
+
 
 router.get('/timeline/today', async (request, response) => {
     try {
@@ -16,6 +18,35 @@ router.get('/timeline/today', async (request, response) => {
         }
 
         response.json(getToday);
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.get('/timeline/:date', async (request, response) => {
+    try {
+        const { date } = request.params;
+
+        if(!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(date))) {
+            return response.status(400).json({ message: 'Date must be YYYY-MM-DD' });
+        }
+
+        // Days that haven't happened yet in the real-time replay stay hidden.
+        if(date > currentWarDate()) {
+            return response.status(404).json({ message: 'Nothing recorded for that day' });
+        }
+
+        const { rows: [getDay] } = await db.query(
+            'SELECT id, title, story, date FROM timeline WHERE date = $1 LIMIT 1',
+            [date]
+        );
+
+        if(!getDay) {
+            return response.status(404).json({ message: 'Nothing recorded for that day' });
+        }
+
+        response.json(getDay);
     } catch (error) {
         console.error(error);
         response.status(500).json({ message: 'Internal server error' });
@@ -170,6 +201,24 @@ router.patch('/me', async (request, response) => {
         response.status(500).json({ message: 'Internal server error' });
     }
 });
+
+router.get('/timeline/:date', async (request, response) => {
+    try {
+        const { rows: [getTimelineEvent] } = await db.query(
+            'SELECT id, title, story, date FROM timeline WHERE date = $1',
+            [request.params.date]
+        );
+
+        if(!getTimelineEvent){
+            return response.status(404).json({ message: 'Timeline event not found' });
+        }
+
+        response.json(getTimelineEvent);
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ message: 'Internal server error' });
+    }
+}); 
 
 
 export default router;
