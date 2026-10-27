@@ -3,16 +3,15 @@ import { db } from '../db';
 
 const OLLAMA_URL = process.env.OLLAMA_URL ?? 'http://localhost:11434';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL ?? 'llama3.2';
+const WAR_START_DATE = '1939-10-12'; // first day of the real-time replay
 
-function nextDay(date: string) {
+function addDays(date: string, offset: number) {
     const d = new Date(`${date}T00:00:00Z`);
-    d.setUTCDate(d.getUTCDate() + 1);
+    d.setUTCDate(d.getUTCDate() + offset);
     return d.toISOString().slice(0, 10);
 }
 
-async function main() {
-    const date = nextDay(currentWarDate()); // generate tomorrow's entry ahead of time
-
+async function generateFor(date: string) {
     const res = await fetch(`${OLLAMA_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -40,6 +39,49 @@ Reply with JSON only: {"title": "headline", "story": "4-6 paragraphs separated b
         [title, story, date]
     );
     console.log(`Saved ${date}: ${title}`);
+}
+
+// Every day from the start of the replay up to today that has no entry yet.
+async function missingDates() {
+    const { rows } = await db.query<{ date: string }>(
+        `SELECT to_char(date, 'YYYY-MM-DD') AS date FROM timeline`
+    );
+    const existing = new Set(rows.map((row) => row.date));
+
+    const missing: string[] = [];
+    for (let date = WAR_START_DATE; date <= currentWarDate(); date = addDays(date, 1)) {
+        if (!existing.has(date)) missing.push(date);
+    }
+    return missing;
+}
+
+async function main() {
+    const args = process.argv.slice(2);
+    const dateFlag = args.indexOf('--date');
+
+    if (args.includes('--backfill')) {
+        const dates = await missingDates();
+        console.log(`Backfilling ${dates.length} day(s)`);
+        for (const date of dates) {
+            // One bad reply shouldn't stop the rest of the batch.
+            await generateFor(date).catch((error) => {
+                console.error(`Failed ${date}:`, error.message);
+                process.exitCode = 1;
+            });
+        }
+        return;
+    }
+
+    if (dateFlag !== -1) {
+        const date = args[dateFlag + 1];
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date ?? '') || Number.isNaN(Date.parse(date))) {
+            throw new Error('--date must be followed by YYYY-MM-DD');
+        }
+        return generateFor(date);
+    }
+
+    // Default: generate tomorrow's entry ahead of time.
+    return generateFor(addDays(currentWarDate(), 1));
 }
 
 main()

@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate": "tsx scripts/generateStory.tsx",
+    "generate:backfill": "tsx scripts/generateStory.tsx --backfill",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
