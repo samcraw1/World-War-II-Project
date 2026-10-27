@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sep1939",
+    "label": "31 Aug 1939",
+    "title": "The war begins in Poland",
+    "from": "1939-08-31",
+    "to": "1939-09-17"
+  },
+  {
+    "id": "may1940",
+    "label": "10 May 1940",
+    "title": "Attack in the West",
+    "from": "1940-05-10",
+    "to": "1940-05-15"
+  },
+  {
+    "id": "dec1941",
+    "label": "7 Dec 1941",
+    "title": "Pearl Harbor & the Pacific",
+    "from": "1941-12-07",
+    "to": "1941-12-11"
+  },
+  {
+    "id": "jun1944",
+    "label": "5 Jun 1944",
+    "title": "D-Day & Normandy",
+    "from": "1944-06-05",
+    "to": "1944-06-13"
+  }
+]

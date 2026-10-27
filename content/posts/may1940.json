@@ -1,0 +1,140 @@
+[
+  {
+    "kind": "record",
+    "id": "f40a",
+    "date": "1940-05-10",
+    "time": "04:30",
+    "theater": "west",
+    "dateline": "THE HAGUE · BRUSSELS · LUXEMBOURG",
+    "headline": "Germany invades the Netherlands, Belgium and Luxembourg",
+    "body": "German forces attack the three neutral countries at dawn. Paratroopers land near The Hague and Rotterdam to seize airfields and bridges.",
+    "sources": [
+      "niod",
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f40b",
+    "date": "1940-05-10",
+    "theater": "west",
+    "dateline": "EBEN-EMAEL, BELGIUM",
+    "headline": "Glider troops land on Belgian fortress",
+    "body": "German airborne engineers land on top of Fort Eben-Emael, one of Europe's strongest fortifications, and disable its guns with shaped charges. The fort surrenders the next day.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f40c",
+    "date": "1940-05-10",
+    "theater": "britain",
+    "dateline": "LONDON",
+    "headline": "Churchill becomes Prime Minister",
+    "body": "Neville Chamberlain resigns. That evening the King asks Winston Churchill to form a government, which will include Labour and Liberal ministers.",
+    "sources": [
+      "tna",
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r40a",
+    "date": "1940-05-10",
+    "time": "08:00",
+    "theater": "west",
+    "person": "willem",
+    "body": "Woke to aircraft over the Maas. From the office window you can see parachutes. The radio says hold your positions and stay indoors. Nobody here has ever seen a war.",
+    "groundedIn": [
+      "f40a"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f40d",
+    "date": "1940-05-13",
+    "theater": "west",
+    "dateline": "SEDAN, FRANCE",
+    "headline": "German forces cross the Meuse at Sedan",
+    "body": "After heavy air attack, German infantry and engineers force a crossing of the river. The French line begins to give way.",
+    "context": "Guderian's panzer corps had moved through the Ardennes, a route French planners had judged unsuitable for armour.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f40e",
+    "date": "1940-05-13",
+    "theater": "britain",
+    "dateline": "HOUSE OF COMMONS",
+    "headline": "Churchill's first speech as Prime Minister",
+    "body": "Churchill tells MPs that his aim is victory and that he has nothing to offer but hardship and sacrifice. The House approves the new government.",
+    "sources": [
+      "tna"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f40f",
+    "date": "1940-05-14",
+    "theater": "west",
+    "dateline": "ROTTERDAM",
+    "headline": "Rotterdam city centre destroyed by bombing",
+    "body": "German bombers strike the city centre while surrender talks are under way. Fires spread across the old city; around 800 to 900 people are killed and tens of thousands made homeless.",
+    "sources": [
+      "niod"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f40g",
+    "date": "1940-05-14",
+    "time": "21:00",
+    "theater": "britain",
+    "dateline": "LONDON · BBC",
+    "headline": "Appeal for Local Defence Volunteers",
+    "body": "War Secretary Anthony Eden asks men aged 17 to 65 who are not in the forces to register at police stations for a new home defence force.",
+    "context": "The LDV was renamed the Home Guard in July 1940. About 250,000 men registered within the first day.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r40b",
+    "date": "1940-05-14",
+    "time": "22:15",
+    "theater": "britain",
+    "person": "arthur",
+    "body": "Heard the appeal at nine and was at the station by half past. Queue already out the door. Sixty-three and I can still read a timetable and hold a rifle. They had no forms left, so they wrote us on the back of lost-dog notices.",
+    "groundedIn": [
+      "f40g"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r40c",
+    "date": "1940-05-14",
+    "time": "16:00",
+    "theater": "west",
+    "person": "willem",
+    "body": "The office is gone. The whole street. We got out to the park and watched it burn from there. My sister is safe. I don't know about Henk.",
+    "groundedIn": [
+      "f40f"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f40h",
+    "date": "1940-05-15",
+    "theater": "west",
+    "dateline": "THE NETHERLANDS",
+    "headline": "Dutch army capitulates",
+    "body": "General Winkelman signs the surrender of Dutch forces in most of the country. Queen Wilhelmina and the government have gone to London.",
+    "sources": [
+      "niod"
+    ]
+  }
+]

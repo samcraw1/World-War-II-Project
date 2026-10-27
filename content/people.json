@@ -1,0 +1,56 @@
+[
+  {
+    "id": "tomasz",
+    "name": "Tomasz W.",
+    "role": "Tram conductor · Warsaw",
+    "initials": "TW"
+  },
+  {
+    "id": "edith",
+    "name": "Edith P.",
+    "role": "Air-raid warden · Bermondsey, London",
+    "initials": "EP"
+  },
+  {
+    "id": "joan",
+    "name": "Joan M.",
+    "role": "Mother of three · Liverpool",
+    "initials": "JM"
+  },
+  {
+    "id": "ray",
+    "name": "Ray D.",
+    "role": "Machinist · Dayton, Ohio",
+    "initials": "RD"
+  },
+  {
+    "id": "willem",
+    "name": "Willem de V.",
+    "role": "Shipping clerk · Rotterdam",
+    "initials": "WV"
+  },
+  {
+    "id": "arthur",
+    "name": "Arthur B.",
+    "role": "Retired railwayman · Kent",
+    "initials": "AB"
+  },
+  {
+    "id": "mae",
+    "name": "Mae K.",
+    "role": "Telephone operator · Honolulu",
+    "initials": "MK"
+  },
+  {
+    "id": "harold",
+    "name": "Cpl. Harold T.",
+    "role": "US paratrooper · Normandy",
+    "initials": "HT"
+  },
+  {
+    "id": "marthe",
+    "name": "Marthe L.",
+    "role": "Dairy farmer · Cotentin, Normandy",
+    "initials": "ML"
+  }
+]

@@ -1,0 +1,433 @@
+[
+  {
+    "kind": "record",
+    "id": "f39a",
+    "date": "1939-08-31",
+    "time": "20:00",
+    "theater": "poland",
+    "dateline": "GLEIWITZ (GLIWICE), UPPER SILESIA",
+    "headline": "Staged 'Polish' raid on German radio station",
+    "body": "SS men posing as Polish insurgents seize the German radio transmitter at Gleiwitz and broadcast a short message. Berlin will cite the incident as provocation.",
+    "context": "The Gleiwitz incident was one of several false-flag operations staged by the SS on the night of 31 August to give Germany a pretext for invading Poland. It was planned by the Sicherheitsdienst (SD).",
+    "sources": [
+      "iwm",
+      "mw"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39b",
+    "date": "1939-08-31",
+    "theater": "britain",
+    "dateline": "LONDON",
+    "headline": "Government orders evacuation of children to begin tomorrow",
+    "body": "Schools in London and other cities are told to assemble pupils on 1 September for evacuation to the countryside under the government scheme.",
+    "context": "Operation Pied Piper moved roughly 1.5 million people, most of them schoolchildren, mothers with young children, and teachers, in the first days of September 1939.",
+    "sources": [
+      "iwm",
+      "tna"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39a",
+    "date": "1939-08-31",
+    "time": "21:30",
+    "theater": "britain",
+    "person": "edith",
+    "body": "Another round of blackout checks on our streets tonight. Mrs. Clarke at no. 14 still has a gap you could drive a bus through. Sandbags at the post are finally stacked. Everyone keeps saying it'll blow over.",
+    "groundedIn": [
+      "f39b"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39c",
+    "date": "1939-09-01",
+    "time": "04:45",
+    "theater": "poland",
+    "dateline": "DANZIG · WESTERPLATTE",
+    "headline": "German battleship opens fire on Polish garrison at Westerplatte",
+    "body": "The old battleship Schleswig-Holstein, on a 'courtesy visit' to Danzig, shells the Polish Military Transit Depot on the Westerplatte peninsula. A small garrison holds its positions.",
+    "context": "These are among the first shots of the war in Europe. The Westerplatte garrison numbered roughly 200 men and was expected to hold for 12 hours.",
+    "sources": [
+      "mw",
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39d",
+    "date": "1939-09-01",
+    "time": "04:40",
+    "theater": "poland",
+    "dateline": "WIELUŃ",
+    "headline": "Luftwaffe bombs the town of Wieluń",
+    "body": "Dive-bombers attack Wieluń, a small town near the German border with no significant military target. The hospital is among the buildings hit; heavy civilian casualties are reported.",
+    "context": "The raid on Wieluń is often cited as one of the first aerial bombings of the war and an early attack on civilians.",
+    "sources": [
+      "ipn",
+      "mw"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39e",
+    "date": "1939-09-01",
+    "time": "06:00",
+    "theater": "poland",
+    "dateline": "WARSAW",
+    "headline": "German forces cross the Polish frontier on three sides",
+    "body": "Without a declaration of war, German army groups advance into Poland from Pomerania and East Prussia in the north, from Silesia in the west, and from Slovakia in the south.",
+    "context": "Germany committed some 1.5 million troops to the invasion. Poland had been only partially mobilised.",
+    "sources": [
+      "iwm",
+      "nww2"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39f",
+    "date": "1939-09-01",
+    "theater": "britain",
+    "dateline": "LONDON",
+    "headline": "Evacuation begins; blackout in force across Britain",
+    "body": "Trains carry the first evacuees out of the cities. A nationwide blackout begins at sunset. Britain and France order general mobilisation.",
+    "sources": [
+      "iwm",
+      "tna"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39g",
+    "date": "1939-09-01",
+    "theater": "global",
+    "dateline": "ROME",
+    "headline": "Italy declares itself 'non-belligerent'",
+    "body": "Mussolini's government announces that Italy will not take military action for the time being, despite its alliance with Germany.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39b",
+    "date": "1939-09-01",
+    "time": "07:10",
+    "theater": "poland",
+    "person": "tomasz",
+    "body": "Sirens at dawn and nobody knew if it was a drill. The radio says the Germans crossed the border in the night. My first run of the day and the car was silent. A woman held her bread like someone would take it.",
+    "groundedIn": [
+      "f39e",
+      "f39c"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39c",
+    "date": "1939-09-01",
+    "time": "09:15",
+    "theater": "britain",
+    "person": "joan",
+    "body": "Walked the two eldest to school with their gas masks in boxes and labels pinned to their coats. Didn't know where the train goes. Teacher says we'll get a postcard. The little one doesn't understand why she can't go too.",
+    "groundedIn": [
+      "f39f",
+      "f39b"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39h",
+    "date": "1939-09-02",
+    "theater": "britain",
+    "dateline": "HOUSE OF COMMONS",
+    "headline": "Chamberlain's statement on Poland met with anger in the Commons",
+    "body": "The Prime Minister tells MPs that Germany has been asked to withdraw but sets no deadline. Members on all sides react angrily to the delay, and the Cabinet presses for an ultimatum.",
+    "context": "The evening session of 2 September is remembered as a turning point. Ministers told Chamberlain that the government might fall unless an ultimatum was issued.",
+    "sources": [
+      "tna"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39i",
+    "date": "1939-09-02",
+    "theater": "poland",
+    "dateline": "WESTERPLATTE",
+    "headline": "Westerplatte holds under heavy dive-bombing",
+    "body": "The garrison survives a major Luftwaffe attack. German assaults on the peninsula have so far failed.",
+    "sources": [
+      "mw"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39j",
+    "date": "1939-09-03",
+    "time": "09:00",
+    "theater": "global",
+    "dateline": "BERLIN",
+    "headline": "British ultimatum delivered: withdraw from Poland by 11 a.m.",
+    "body": "Britain's ambassador hands the German government a final note. If no assurance is given by 11:00 British time, a state of war will exist.",
+    "sources": [
+      "tna",
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39k",
+    "date": "1939-09-03",
+    "time": "11:15",
+    "theater": "britain",
+    "dateline": "LONDON · BBC",
+    "headline": "Britain is at war with Germany",
+    "body": "Neville Chamberlain announces in a radio broadcast from Downing Street that no reply has been received and that Britain is therefore at war.",
+    "context": "Australia and New Zealand declared war the same day. France's ultimatum expired at 17:00.",
+    "sources": [
+      "tna",
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39l",
+    "date": "1939-09-03",
+    "time": "17:00",
+    "theater": "west",
+    "dateline": "PARIS",
+    "headline": "France at war with Germany",
+    "body": "The French ultimatum expires without reply. France is now at war alongside Britain.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39m",
+    "date": "1939-09-03",
+    "theater": "global",
+    "dateline": "CANBERRA · WELLINGTON",
+    "headline": "Australia and New Zealand declare war",
+    "body": "Prime Minister Robert Menzies tells Australians by radio that their country is also at war. New Zealand follows.",
+    "sources": [
+      "awm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39n",
+    "date": "1939-09-03",
+    "time": "19:40",
+    "theater": "atlantic",
+    "dateline": "NORTH ATLANTIC, WEST OF THE HEBRIDES",
+    "headline": "Liner Athenia torpedoed without warning",
+    "body": "The passenger liner SS Athenia, bound from Glasgow for Montreal with more than 1,100 people aboard, is torpedoed by the German submarine U-30. More than 110 people are killed, including Americans.",
+    "context": "Germany denied responsibility for years. The sinking violated the prize rules Germany had agreed to and fed fears of unrestricted submarine warfare.",
+    "sources": [
+      "iwm",
+      "nhhc"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39d",
+    "date": "1939-09-03",
+    "time": "11:40",
+    "theater": "britain",
+    "person": "edith",
+    "body": "Heard it on the wireless at the post, then not ten minutes later the sirens went. We had people into the shelter in their Sunday clothes. All clear came soon after. False alarm. My hands still haven't stopped.",
+    "groundedIn": [
+      "f39k"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39e",
+    "date": "1939-09-03",
+    "time": "12:05",
+    "theater": "americas",
+    "person": "ray",
+    "body": "Dad had the Philco up loud before church let out. England's in it now. Fellas at the corner say it's Europe's business and not ours. Most of them were saying the same thing in 1917, Dad says.",
+    "groundedIn": [
+      "f39k"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39o",
+    "date": "1939-09-04",
+    "theater": "britain",
+    "dateline": "NORTH SEA",
+    "headline": "RAF raids German warships at Wilhelmshaven and Brunsbüttel",
+    "body": "Blenheim and Wellington bombers attack the German fleet in the first RAF offensive operation of the war. Several aircraft are lost; damage to the ships is light.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39p",
+    "date": "1939-09-05",
+    "theater": "americas",
+    "dateline": "WASHINGTON",
+    "headline": "United States proclaims neutrality",
+    "body": "President Roosevelt issues a proclamation of neutrality in the European war, invoking existing neutrality laws.",
+    "context": "In a fireside chat two days earlier, Roosevelt had said the nation would remain neutral but could not ask every American to remain neutral in thought.",
+    "sources": [
+      "nara"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39q",
+    "date": "1939-09-06",
+    "theater": "poland",
+    "dateline": "KRAKÓW",
+    "headline": "German troops enter Kraków",
+    "body": "Poland's former royal capital is occupied as German forces push on from the south-west. The Polish government is moving east from Warsaw.",
+    "sources": [
+      "ipn"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39r",
+    "date": "1939-09-06",
+    "theater": "global",
+    "dateline": "CAPE TOWN",
+    "headline": "South Africa declares war",
+    "body": "After a split in the cabinet, Jan Smuts replaces J.B.M. Hertzog as Prime Minister, and South Africa declares war on Germany.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39f",
+    "date": "1939-09-06",
+    "theater": "britain",
+    "person": "joan",
+    "body": "Postcard came! They're on a farm in Wales. Our Billy has seen a cow up close and is not impressed. Their lady sounds kind. House is far too quiet.",
+    "groundedIn": [
+      "f39f"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39s",
+    "date": "1939-09-07",
+    "theater": "poland",
+    "dateline": "WESTERPLATTE",
+    "headline": "Westerplatte garrison surrenders after seven days",
+    "body": "Out of ammunition and supplies and with many wounded, the Polish defenders capitulate. They had been expected to hold for hours.",
+    "context": "The defence of Westerplatte became a lasting symbol of Polish resistance.",
+    "sources": [
+      "mw",
+      "ipn"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39t",
+    "date": "1939-09-07",
+    "theater": "west",
+    "dateline": "SAARLAND",
+    "headline": "French troops advance into the Saar",
+    "body": "French divisions move a few kilometres into German territory near Saarbrücken in a limited offensive. German forces fall back to the Siegfried Line.",
+    "context": "The Saar Offensive was halted within days, and French troops withdrew in October. It did little to relieve Poland.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39g",
+    "date": "1939-09-07",
+    "time": "19:00",
+    "theater": "poland",
+    "person": "tomasz",
+    "body": "Polish Radio said Westerplatte has fallen. A whole week. Men on my tram took their hats off. We are digging trenches in the parks now, all of us, clerks and grandmothers.",
+    "groundedIn": [
+      "f39s"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39u",
+    "date": "1939-09-08",
+    "theater": "poland",
+    "dateline": "WARSAW",
+    "headline": "German armour reaches Warsaw's outskirts and is driven back",
+    "body": "Panzer units attack the south-western districts of Ochota and Wola. Polish troops and civilian volunteers repel the assault.",
+    "sources": [
+      "ipn",
+      "mw"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39v",
+    "date": "1939-09-09",
+    "theater": "poland",
+    "dateline": "RIVER BZURA",
+    "headline": "Polish counter-attack opens on the Bzura",
+    "body": "The Polish armies 'Poznań' and 'Pomorze' strike south into the flank of the German Eighth Army west of Warsaw. It is the largest battle of the campaign.",
+    "sources": [
+      "ipn",
+      "iwm"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39w",
+    "date": "1939-09-10",
+    "theater": "americas",
+    "dateline": "OTTAWA",
+    "headline": "Canada declares war on Germany",
+    "body": "Parliament approves the declaration a week after Britain's. Canada makes the decision on its own, a sign of its independence within the Commonwealth.",
+    "sources": [
+      "iwm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39h",
+    "date": "1939-09-12",
+    "theater": "poland",
+    "person": "tomasz",
+    "body": "No trams now. The lines are cut. I carry water for the building in two buckets from the pump on the square. Bread queue at 5 a.m. Shelling at night from the west.",
+    "groundedIn": [
+      "f39u"
+    ]
+  },
+  {
+    "kind": "record",
+    "id": "f39x",
+    "date": "1939-09-17",
+    "time": "03:00",
+    "theater": "poland",
+    "dateline": "EASTERN POLAND",
+    "headline": "Soviet Union invades Poland from the east",
+    "body": "The Red Army crosses Poland's eastern border, in line with the secret protocol of the August pact between Germany and the USSR.",
+    "context": "The Molotov–Ribbentrop Pact of 23 August 1939 had divided Eastern Europe into German and Soviet spheres.",
+    "sources": [
+      "ipn",
+      "iwm",
+      "ushmm"
+    ]
+  },
+  {
+    "kind": "reconstructed",
+    "id": "r39i",
+    "date": "1939-09-17",
+    "time": "14:00",
+    "theater": "poland",
+    "person": "tomasz",
+    "body": "People on the stairs say the Soviets have crossed in the east. Someone laughed, then stopped. Nobody knows where the government is.",
+    "groundedIn": [
+      "f39x"
+    ]
+  }
+]
